@@ -1,10 +1,24 @@
 import Highway from "@dogstudio/highway";
-
 // GSAP Library
 import { gsap } from "gsap";
 
 import Quicklink from "quicklink/dist/quicklink.umd";
 import "intersection-observer";
+
+const firstAnimation = ()=>{
+  window.addEventListener("DOMContentLoaded", (event) => {
+    let namespace = document.querySelector("#namespace");
+    let tl = gsap.timeline();
+
+    let transitionContainer = document.querySelector(
+      ".transitionContainer-content"
+    );
+
+    tl.fromTo('#app', 1, {opacity:0},{opacity:1}).fromTo('nav', 0.8, {translateY: '-100%',opacity:0}, {translateY: 0, opacity:1});
+  });
+}
+
+firstAnimation();
 // Fade
 class Fade extends Highway.Transition {
   in({ from, to, done }) {
