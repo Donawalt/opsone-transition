@@ -3,6 +3,8 @@ import Highway from "@dogstudio/highway";
 // GSAP Library
 import Tween from "gsap";
 
+import Quicklink from 'quicklink/dist/quicklink.umd';
+import 'intersection-observer';
 // Fade
 class Fade extends Highway.Transition {
   in({ from, to, done }) {
@@ -15,10 +17,11 @@ class Fade extends Highway.Transition {
     // Animation
     Tween.fromTo(
       to,
-      0.5,
-      { opacity: 0 },
+      0.7,
+      { opacity: 0, translateX: "-100%" },
       {
         opacity: 1,
+        translateX: 0,
         onComplete: done
       }
     );
@@ -29,9 +32,10 @@ class Fade extends Highway.Transition {
     Tween.fromTo(
       from,
       0.5,
-      { opacity: 1 },
+      { opacity: 1, translateX: 0 },
       {
         opacity: 0,
+        translateX: "100%",
         onComplete: done
       }
     );
@@ -44,11 +48,7 @@ const H = new Highway.Core({
   }
 });
 
-// Get all menu links
 const links = document.querySelectorAll("nav a");
-
-// Listen the `NAVIGATE_IN` event
-// This event is sent everytime a `data-router-view` is added to the DOM Tree
 H.on("NAVIGATE_IN", ({ to, location }) => {
   // Check Active Link
   for (let i = 0; i < links.length; i++) {
@@ -63,6 +63,13 @@ H.on("NAVIGATE_IN", ({ to, location }) => {
     }
   }
 });
+
+H.on('NAVIGATE_END', ({to}) => {
+  Quicklink.listen({
+    el: to.view
+  });
+});
+
 /* import barba from "@barba/core";
 import barbaPrefetch from "@barba/prefetch";
 

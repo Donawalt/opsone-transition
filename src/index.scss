@@ -12,12 +12,12 @@ body{
       justify-content: center;
       align-items:center; 
       h1{
-        font-size: 6vh;
+        font-size: 15vh;
       }
     }
     &.content{
-      padding-left: 64px;
-      padding-right: 64px; 
+      padding-left: 128px;
+      padding-right: 128px; 
       font-size: 20px; 
       line-height: 1.5em;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -26,6 +26,13 @@ body{
       align-items: center;
       margin: auto;
       flex-direction: column;
+      h3{
+        font-size: 2em;
+      }
+      video{
+        height: 50vh;
+        margin-top: 36px;
+      }
     }
   }
   footer{
@@ -56,6 +63,8 @@ body{
     padding-left: 16px;
     padding-right: 16px;
     align-items: center;
+    font-family: sans-serif;
+    z-index: 1000;
     ul{
       display: flex;
       li{
