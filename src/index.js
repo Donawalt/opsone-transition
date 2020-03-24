@@ -1,13 +1,20 @@
 import Highway from "@dogstudio/highway";
 
 // GSAP Library
-import Tween from "gsap";
+import { gsap } from "gsap";
 
-import Quicklink from 'quicklink/dist/quicklink.umd';
-import 'intersection-observer';
+import Quicklink from "quicklink/dist/quicklink.umd";
+import "intersection-observer";
 // Fade
 class Fade extends Highway.Transition {
   in({ from, to, done }) {
+    console.log(to);
+    let namespace = document.querySelector("#namespace");
+    let t = document.createTextNode(String(to.dataset.routerView));
+    let transitionContainer = document.querySelector(
+      ".transitionContainer-content"
+    );
+    namespace.appendChild(t);
     // Reset Scroll
     window.scrollTo(0, 0);
 
@@ -15,29 +22,50 @@ class Fade extends Highway.Transition {
     from.remove();
 
     // Animation
-    Tween.fromTo(
-      to,
+    let tl = gsap.timeline({
+    });
+
+    tl.fromTo(
+      namespace,
       0.7,
-      { opacity: 0, translateX: "-100%" },
+      { opacity: 0, translateY: "-100%" },
       {
         opacity: 1,
-        translateX: 0,
-        onComplete: done
+        translateY: 0
       }
-    );
+    )
+      .to(namespace, {
+        opacity: 0,
+        translateY: "100%",
+        duration: 0.7,
+        delay: 0.3,
+        onComplete: function() {
+          namespace.innerHTML = '';
+        }
+      })
+      .to(transitionContainer, {
+        translateX: 0,
+        translateY: "-100%",
+        duration: 0.5, 
+        pointerEvents: 'none',
+        onComplete: done
+      }).fromTo('h1', {
+        opacity:0, rotate: '5'
+      }, {opacity: 1, duration: 0.7, rotate: 0, delay: '-0.25'});
   }
 
-  out({ from, done }) {
+  out({ from, to, done }) {
+    let transitionContainer = document.querySelector(
+      ".transitionContainer-content"
+    );
     // Animation
-    Tween.fromTo(
-      from,
-      0.5,
-      { opacity: 1, translateX: 0 },
-      {
-        opacity: 0,
-        translateX: "100%",
-        onComplete: done
-      }
+    let tl = gsap.timeline();
+
+    tl.fromTo(
+      transitionContainer,
+      0.7,
+      { translateY: "100%", translateX: 0 },
+      { translateY: 0, translateX: 0, onComplete: done }
     );
   }
 }
@@ -64,7 +92,7 @@ H.on("NAVIGATE_IN", ({ to, location }) => {
   }
 });
 
-H.on('NAVIGATE_END', ({to}) => {
+H.on("NAVIGATE_END", ({ to }) => {
   Quicklink.listen({
     el: to.view
   });
