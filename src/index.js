@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import Quicklink from "quicklink/dist/quicklink.umd";
 import "intersection-observer";
 
+const links = document.querySelectorAll("nav a");
 const firstAnimation = ()=>{
   window.addEventListener("DOMContentLoaded", (event) => {
     let namespace = document.querySelector("#namespace");
@@ -15,6 +16,19 @@ const firstAnimation = ()=>{
     );
 
     tl.fromTo('#app', 1, {opacity:0},{opacity:1}).fromTo('nav', 0.8, {translateY: '-100%',opacity:0}, {translateY: 0, opacity:1});
+
+    // Check Active Link
+  for (let i = 0; i < links.length; i++) {
+    const link = links[i];
+
+    // Clean class
+    link.classList.remove("is-active");
+
+    // Active link
+    if (link.href === location.href) {
+      link.classList.add("is-active");
+    }
+  }
   });
 }
 
@@ -90,7 +104,6 @@ const H = new Highway.Core({
   }
 });
 
-const links = document.querySelectorAll("nav a");
 H.on("NAVIGATE_IN", ({ to, location }) => {
   // Check Active Link
   for (let i = 0; i < links.length; i++) {

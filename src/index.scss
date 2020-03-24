@@ -97,6 +97,12 @@ body{
     align-items: center;
     font-family: sans-serif;
     z-index: 1000;
+    p{
+      a{
+        color: white;
+        text-decoration: none; 
+      }
+    }
     ul{
       display: flex;
       li{
@@ -114,6 +120,10 @@ body{
         &.is-active{
           color: orange; 
           transition: 300ms;
+          &:after{
+            content:'○';
+
+          }
         }
       }
     }
