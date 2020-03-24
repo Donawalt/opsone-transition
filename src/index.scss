@@ -73,12 +73,15 @@ body{
       a{
         color: white; 
         text-decoration: none;
+        transition: 100ms;
         &:hover{
           color:orange; 
           text-decoration: underline;
+          transition: 200ms;
         }
         &.is-active{
           color: orange; 
+          transition: 300ms;
         }
       }
     }
