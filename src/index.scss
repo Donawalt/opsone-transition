@@ -1,95 +1,110 @@
-@import './reset.scss';
+@import "./reset.scss";
 
-body{
+body {
   background-color: black;
-  color: white; 
-  .transitionContainer{
+  color: white;
+  .transitionContainer {
     height: 100vh;
-    width: 100vw; 
+    width: 100vw;
     position: fixed;
     z-index: 999;
-    top:0;
+    top: 0;
     pointer-events: none;
-    &>div{
+    & > div {
       height: 100vh;
-      width:100vw;
-      background-color: orange; 
-      color:black;
+      width: 100vw;
+      background-color: orange;
+      color: black;
       transform: translate(100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      p{
+      p {
         height: 100px;
         overflow: hidden;
         font-size: 60px;
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "Times New Roman", Times, serif;
         text-transform: capitalize;
-        span{
+        span {
           display: block;
         }
       }
     }
   }
-  section{
+  section {
     min-height: 100vh;
-    &.hero{
+    &.hero {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items:center; 
-      h1{
+      align-items: center;
+      h1 {
         font-size: 15vh;
       }
     }
-    &.content{
+    &.content {
       padding-left: 128px;
-      padding-right: 128px; 
-      font-size: 20px; 
+      padding-right: 128px;
+      font-size: 20px;
       line-height: 1.5em;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       margin: auto;
       flex-direction: column;
-      h3{
+      h3 {
         font-size: 2em;
+        margin-bottom: 30px;
       }
-      video{
+      div{
+        display: flex;
+      }
+      img {
+        text-align: center;
+        height: 30px;
+        height: 60px;
+        max-width: 140px;
+        margin: auto;
+        margin-right: 20px;
+        &.ModularLoad{
+          filter: invert(1);
+        }
+      }
+      video {
         height: 50vh;
         margin-top: 36px;
       }
     }
   }
-  footer{
+  footer {
     height: 12vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgb(20, 20, 20);
-    button{
+    button {
       background-color: orange;
-      border: none; 
+      border: none;
       font-size: 20px;
       border-bottom: white solid 2px;
       transition: 300ms;
-      &:hover{
+      &:hover {
         transition: 300ms;
         border-bottom: orange solid 2px;
       }
-      a{
-        color:white;
+      a {
+        color: white;
         text-decoration: none;
-      } 
+      }
     }
   }
-  nav{
+  nav {
     position: fixed;
     height: 35px;
     background-color: black;
     border-bottom: 2px solid orange;
-    width:calc(100% - 32px);
+    width: calc(100% - 32px);
     display: flex;
     justify-content: space-between;
     padding-left: 16px;
@@ -97,32 +112,31 @@ body{
     align-items: center;
     font-family: sans-serif;
     z-index: 1000;
-    p{
-      a{
+    p {
+      a {
         color: white;
-        text-decoration: none; 
+        text-decoration: none;
       }
     }
-    ul{
+    ul {
       display: flex;
-      li{
+      li {
         margin-left: 8px;
       }
-      a{
-        color: white; 
+      a {
+        color: white;
         text-decoration: none;
         transition: 100ms;
-        &:hover{
-          color:orange; 
+        &:hover {
+          color: orange;
           text-decoration: underline;
           transition: 200ms;
         }
-        &.is-active{
-          color: orange; 
+        &.is-active {
+          color: orange;
           transition: 300ms;
-          &:after{
-            content:'○';
-
+          &:after {
+            content: "○";
           }
         }
       }
