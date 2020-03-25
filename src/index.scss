@@ -136,13 +136,18 @@ body {
         text-decoration: none;
         transition: 100ms;
         &:hover {
-          color: orange;
+          color: orangered;
           text-decoration: underline;
           transition: 200ms;
         }
         &.is-active {
           color: orange;
           transition: 300ms;
+          &:hover {
+            color: orangered;
+            text-decoration: underline;
+            transition: 200ms;
+          }
           &:after {
             content: "○";
           }
