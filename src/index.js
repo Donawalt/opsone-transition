@@ -11,7 +11,12 @@ const intersectionObserverSection = new IntersectionObserver(
       if (entry.isIntersecting) {
         // element is in viewport, do the stuff
         console.log(entry);
-        gsap.fromTo(entry.target, 1, {opacity:0},{opacity: 1, delay: 0.7});
+        gsap.fromTo(
+          entry.target,
+          1,
+          { opacity: 0 },
+          { opacity: 1, delay: 0.7 }
+        );
         // it's good to remove observer,
         // if you don't need it any more
         observer.unobserve(entry.target);
@@ -23,16 +28,15 @@ const intersectionObserverSection = new IntersectionObserver(
 const intersectionObserverVideo = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting){
+      if (entry.isIntersecting) {
         console.log(entry);
-        setTimeout(()=>{
+        setTimeout(() => {
           entry.target.load();
         }, 500);
       }
     });
   }
 );
-
 
 const links = document.querySelectorAll("nav a");
 const checkActiveLink = links => {
@@ -65,6 +69,18 @@ const firstAnimation = () => {
     );
 
     checkActiveLink(links);
+    const section = [...document.querySelectorAll("section.content")];
+    const video = [...document.querySelectorAll("video")];
+
+    section.forEach(element => {
+      intersectionObserverSection.observe(element);
+    });
+
+    if (video.length > 0) {
+      video.forEach(element => {
+        intersectionObserverVideo.observe(element);
+      });
+    }
   });
 };
 
@@ -156,10 +172,10 @@ H.on("NAVIGATE_IN", ({ to, location }) => {
     intersectionObserverSection.observe(element);
   });
 
-  if (video.length > 0){
-    video.forEach(element=>{
+  if (video.length > 0) {
+    video.forEach(element => {
       intersectionObserverVideo.observe(element);
-    })
+    });
   }
 });
 
