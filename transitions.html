@@ -10,12 +10,13 @@
       <p><a href="/">OPSONE</a></p>
       <ul>
         <li><a href="/index.html">Home</a></li>
-        <li><a href="/transitions.html">Transition</a></li>
+        <li><a href="/transitions.html">Transitions</a></li>
         <li><a href="/animations.html">Animations</a></li>
+        <li><a href="/ressources.html">Ressources</a></li>
       </ul>
     </nav>
     <main data-router-wrapper>
-      <div id="app" data-router-view="transitions">
+      <section id="app" data-router-view="transitions">
         <section class="hero">
           <h1>
             <span>
@@ -35,8 +36,10 @@
               vas avec de se fait n’ayant pas beaucoup de site l’utilisant et
               d’exemple sur le net , la courbe d’apprentissage et plutôt longue,
               mais reste un outils très intéressant et pertinent à l’avenir , la
-              première version ayant eu énormément de succès.<br>
-              <a href="https://barba.js.org" target="_blank">La documentation</a>
+              première version ayant eu énormément de succès.<br />
+              <a href="https://barba.js.org" target="_blank"
+                >La documentation</a
+              >
             </p>
           </div>
         </section>
@@ -66,8 +69,10 @@
               HighwayJs est l’outils utilisé et conçu par l’agence Dogstudio ,
               il propose les mêmes chose que BarbaJS mais avec une logique
               différente. C'est se que j'utilise sur le mini site sur lequel
-              vous êtes.<br>
-              <a href="https://highway.js.org" target="_blank">La documentation</a>
+              vous êtes.<br />
+              <a href="https://highway.js.org" target="_blank"
+                >La documentation</a
+              >
             </p>
           </div>
         </section>
@@ -79,15 +84,20 @@
               Swup Js est un outil plus simple que les deux précédent et plus
               simple à prendre en main , un excellent tutoriel fait par
               Graphikart et une bonne documentation est la pour nous aider.
-              Malheureusement peu d’exemples en production.<br>
-              <a href="https://github.com/swup/swup" target="_blank">La documentation</a>
+              Malheureusement peu d’exemples en production.<br />
+              <a href="https://github.com/swup/swup" target="_blank"
+                >La documentation</a
+              >
             </p>
           </div>
         </section>
         <section class="content">
           <h3>ModularLoad</h3>
           <div>
-            <img src="./src/images/logo-modular-load.png" class="logo-techno ModularLoad" />
+            <img
+              src="./src/images/logo-modular-load.png"
+              class="logo-techno ModularLoad"
+            />
             <p>
               Encore plus léger que les solutions précédentes mais proposant
               moins d’options juste le minimum, ModularLoad est l’outils
@@ -101,8 +111,12 @@
                 target="_blanck"
                 >https://photo-story-by-dona.netlify.com/</a
               >
-              <br>
-              <a href="https://github.com/modularorg/modularload" target="_blank">La documentation</a>
+              <br />
+              <a
+                href="https://github.com/modularorg/modularload"
+                target="_blank"
+                >La documentation</a
+              >
             </p>
           </div>
         </section>
@@ -112,12 +126,44 @@
             <source src="./src/videos/video-4.mp4" type="video/mov" />
           </video>
         </section>
+        <section class="content">
+          <h3>Framework js (React, Vue, Svelte etc ...)</h3>
+          <div>
+            <img
+              src="./src/images/logo-spa.jpg"
+              class="logo-techno ModularLoad"
+            />
+            <p>
+              Dans le cas des frameworks JS, des outils sont déja présent
+              nativement au sein de ses frameworks pour appliquer des
+              transitions ou des évènements particulières.
+            </p>
+          </div>
+        </section>
+        <section class="content">
+          <h3>Suivie (Google Analytics & Google Tag Manager)</h3>
+          <div>
+            <img src="./src/images/logo-google.png" class="logo-techno" />
+            <p>
+              Pour le suivie sur google analytics les informations sur la page
+              actuel doivent être systematiquement renvoyer en JS. Pour le
+              google tag manager il faut activer l'"History Change". Les
+              techniques peuvent légèrement différer suivant la librairie
+              utilisée.<br />
+              <a
+                href="https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications"
+                target="_blanck"
+                >Plus d'information ici</a
+              >
+            </p>
+          </div>
+        </section>
         <footer>
           <button>
             <a href="./animations.html">Suivant</a>
           </button>
         </footer>
-      </div>
+      </section>
     </main>
     <div class="transitionContainer">
       <div class="transitionContainer-content">
