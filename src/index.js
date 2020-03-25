@@ -5,19 +5,37 @@ import { gsap } from "gsap";
 import Quicklink from "quicklink/dist/quicklink.umd";
 import "intersection-observer";
 
+const intersectionObserverSection = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // element is in viewport, do the stuff
+        console.log(entry);
+        gsap.fromTo(entry.target, 1, {opacity:0},{opacity: 1, delay: 0.8});
+        // it's good to remove observer,
+        // if you don't need it any more
+        observer.unobserve(entry.target);
+      }
+    });
+  }
+);
+
+const intersectionObserverVideo = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        console.log(entry);
+        setTimeout(()=>{
+          entry.target.load();
+        }, 500);
+      }
+    });
+  }
+);
+
+
 const links = document.querySelectorAll("nav a");
-const firstAnimation = ()=>{
-  window.addEventListener("DOMContentLoaded", (event) => {
-    let namespace = document.querySelector("#namespace");
-    let tl = gsap.timeline();
-
-    let transitionContainer = document.querySelector(
-      ".transitionContainer-content"
-    );
-
-    tl.fromTo('#app', 1, {opacity:0},{opacity:1}).fromTo('nav', 0.8, {translateY: '-100%',opacity:0}, {translateY: 0, opacity:1});
-
-    // Check Active Link
+const checkActiveLink = links => {
   for (let i = 0; i < links.length; i++) {
     const link = links[i];
 
@@ -29,8 +47,26 @@ const firstAnimation = ()=>{
       link.classList.add("is-active");
     }
   }
+};
+const firstAnimation = () => {
+  window.addEventListener("DOMContentLoaded", event => {
+    let namespace = document.querySelector("#namespace");
+    let tl = gsap.timeline();
+
+    let transitionContainer = document.querySelector(
+      ".transitionContainer-content"
+    );
+
+    tl.fromTo("#app", 1, { opacity: 0 }, { opacity: 1 }).fromTo(
+      "nav",
+      0.8,
+      { translateY: "-100%", opacity: 0 },
+      { translateY: 0, opacity: 1 }
+    );
+
+    checkActiveLink(links);
   });
-}
+};
 
 firstAnimation();
 // Fade
@@ -50,8 +86,7 @@ class Fade extends Highway.Transition {
     from.remove();
 
     // Animation
-    let tl = gsap.timeline({
-    });
+    let tl = gsap.timeline({});
 
     tl.fromTo(
       namespace,
@@ -68,18 +103,24 @@ class Fade extends Highway.Transition {
         duration: 0.7,
         delay: 0.3,
         onComplete: function() {
-          namespace.innerHTML = '';
+          namespace.innerHTML = "";
         }
       })
       .to(transitionContainer, {
         translateX: 0,
         translateY: "-100%",
-        duration: 0.5, 
-        pointerEvents: 'none',
+        duration: 0.5,
+        pointerEvents: "none",
         onComplete: done
-      }).fromTo('h1', {
-        opacity:0, rotate: '5'
-      }, {opacity: 1, duration: 0.7, rotate: 0, delay: '-0.25'});
+      })
+      .fromTo(
+        "h1",
+        {
+          opacity: 0,
+          rotate: "5"
+        },
+        { opacity: 1, duration: 0.7, rotate: 0, delay: "-0.25" }
+      );
   }
 
   out({ from, to, done }) {
@@ -105,17 +146,20 @@ const H = new Highway.Core({
 });
 
 H.on("NAVIGATE_IN", ({ to, location }) => {
-  // Check Active Link
-  for (let i = 0; i < links.length; i++) {
-    const link = links[i];
+  // Check Active Links
+  checkActiveLink(links);
 
-    // Clean class
-    link.classList.remove("is-active");
+  const section = [...document.querySelectorAll("section.content")];
+  const video = [...document.querySelectorAll("video")];
 
-    // Active link
-    if (link.href === location.href) {
-      link.classList.add("is-active");
-    }
+  section.forEach(element => {
+    intersectionObserverSection.observe(element);
+  });
+
+  if (video.length > 0){
+    video.forEach(element=>{
+      intersectionObserverVideo.observe(element);
+    })
   }
 });
 
