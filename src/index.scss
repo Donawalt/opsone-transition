@@ -53,6 +53,14 @@ body {
       align-items: center;
       margin: auto;
       flex-direction: column;
+      a{
+        color: orange;
+        transition: 300ms;
+        &:hover{
+          color: orangered;
+          transition: 300ms;
+        }
+      }
       h3 {
         font-size: 2em;
         margin-bottom: 30px;
