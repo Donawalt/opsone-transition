@@ -15,7 +15,7 @@ const intersectionObserverSection = new IntersectionObserver(
           entry.target,
           1,
           { opacity: 0 },
-          { opacity: 1, delay: 0.7 }
+          { opacity: 1, delay: 0.5 }
         );
         // it's good to remove observer,
         // if you don't need it any more
@@ -32,6 +32,7 @@ const intersectionObserverVideo = new IntersectionObserver(
         console.log(entry);
         setTimeout(() => {
           entry.target.load();
+          observer.unobserve(entry.target);
         }, 500);
       }
     });
