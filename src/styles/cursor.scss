@@ -25,6 +25,35 @@
             animation: Expand 0.5s;
         }
     }
+    &.linkOver{
+        background-color: #ffd32f;
+        transition: 200ms;
+        mix-blend-mode: difference;
+        &::after{
+            transition: 200ms;
+            width: 0px;
+            height:0px;
+            display: none;
+        }
+    }
+    &.videoOver{
+        background-color: #ffd32f;
+        transition: 200ms;
+        mix-blend-mode: exclusion;
+        transform: scale(2);
+        &::after{
+            content: "▶";
+            font-size: 5px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            animation: none;
+        }
+    }
 }
 
 @keyframes Animafter {

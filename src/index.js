@@ -6,21 +6,45 @@ import Quicklink from "quicklink/dist/quicklink.umd";
 
 import "intersection-observer";
 // Custom function
-import './scripts/cursor';
-import intersectionObserverSection from './scripts/utils/intersectionObserverSection';
-import intersectionObserverVideo from './scripts/utils/intersectionObserverVideo';
-import OTransition from './scripts/utils/OTransition';
-
+import "./scripts/cursor";
+import intersectionObserverSection from "./scripts/utils/intersectionObserverSection";
+import intersectionObserverVideo from "./scripts/utils/intersectionObserverVideo";
+import OTransition from "./scripts/utils/OTransition";
 
 const links = document.querySelectorAll("nav a");
+let currentAllLinks = document.querySelectorAll("a");
+let currentAllVideos = document.querySelectorAll("video");
+
+//* Some Utils functions *//
+const checkHoverLinks = (allLinks) => {
+  allLinks.forEach(link => {
+    const cursor = document.querySelector("#custom-cursor");
+    link.addEventListener('mouseover', (e)=>{
+      cursor.classList.add("linkOver");
+    });
+    link.addEventListener('mouseleave',()=>{
+      cursor.classList.remove("linkOver");
+    })
+  })
+};
+const checkHoverVideos = (allVideos)=>{
+  allVideos.forEach(video => {
+    const cursor = document.querySelector("#custom-cursor");
+    video.addEventListener('mouseover', (e)=>{
+      cursor.classList.add("videoOver");
+    });
+    video.addEventListener('mouseleave',()=>{
+      cursor.classList.remove("videoOver");
+    })
+  });
+}
+
 const checkActiveLink = links => {
   for (let i = 0; i < links.length; i++) {
     const link = links[i];
 
     // Clean class
     link.classList.remove("is-active");
-
-    // Active link
     if (link.href === location.href) {
       link.classList.add("is-active");
     }
@@ -44,6 +68,8 @@ const firstAnimation = () => {
     );
 
     checkActiveLink(links);
+    checkHoverLinks(currentAllLinks);
+    checkHoverVideos(currentAllVideos);
     const section = [...document.querySelectorAll("section.content")];
     const video = [...document.querySelectorAll("video")];
 
@@ -59,7 +85,6 @@ const firstAnimation = () => {
   });
 };
 
-firstAnimation();
 
 const H = new Highway.Core({
   transitions: {
@@ -68,9 +93,12 @@ const H = new Highway.Core({
 });
 
 H.on("NAVIGATE_IN", ({ to, location }) => {
+  currentAllLinks = document.querySelectorAll("a");
+  currentAllVideos = document.querySelectorAll("video");
   // Check Active Links
   checkActiveLink(links);
-
+  checkHoverLinks(currentAllLinks);
+  checkHoverVideos(currentAllVideos);
   const section = [...document.querySelectorAll("section.content")];
   const video = [...document.querySelectorAll("video")];
 
@@ -89,5 +117,9 @@ H.on("NAVIGATE_END", ({ to }) => {
   Quicklink.listen({
     el: to.view
   });
+  const cursor = document.querySelector("#custom-cursor");
+  cursor.classList.remove("linkOver");
 });
 
+//*Running the initial loading animation *//
+removeEventListener(firstAnimation());
