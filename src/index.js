@@ -6,6 +6,7 @@ import Quicklink from "quicklink/dist/quicklink.umd";
 
 import "intersection-observer";
 // Custom function
+import './scripts/cursor';
 import intersectionObserverSection from './scripts/utils/intersectionObserverSection';
 import intersectionObserverVideo from './scripts/utils/intersectionObserverVideo';
 import OTransition from './scripts/utils/OTransition';

@@ -1,0 +1,71 @@
+#custom-cursor{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ffd32f;
+    border-radius: 50%;
+    position: absolute;
+    pointer-events: none;
+    z-index: 100000;
+    transform: translate(50%,50%);
+    &::after{
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        border: 8px solid gray;
+        border-radius: 50%;
+        opacity: .5;
+        top: -8px;
+        left: -8px;
+        animation: Animafter infinite 1s;
+    }
+    &.expand{
+        animation: Expand2 0.5s;
+        &:after{
+            animation: Expand 0.5s;
+        }
+    }
+}
+
+@keyframes Animafter {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@keyframes Expand {
+    0%{
+        transform: scale(1);
+        border: 8px solid gray;
+        opacity: .5;
+    }
+    80%{
+        transform: scale(2);
+        border: 8px solid #ffd32f;
+        opacity: .8;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes Expand2 {
+    0%{
+        transform: scale(1);
+        border: 8px solid crimson;
+        opacity: .5;
+    }
+    80%{
+        transform: scale(1.5);
+        opacity: .8;
+    }
+    100%{
+        opacity: 0;
+    }
+}
