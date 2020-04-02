@@ -1,5 +1,27 @@
 section {
     min-height: 100vh;
+    details{
+      &[open]{
+        ul {
+          animation: appearDetails 600ms; 
+          @keyframes appearDetails {
+            from {
+              opacity: 0;
+              height: 0px;
+            }
+            to {
+              opacity: 1;
+              height: fit-content;
+            }
+          }
+        }
+      }
+      summary {
+        &::marker {
+          transition: 300ms;
+        }
+      }
+    }
     &.hero {
       display: flex;
       flex-direction: column;
